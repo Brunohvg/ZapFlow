@@ -4,7 +4,6 @@ GET http://127.0.0.1:8000/api/users/
 GET http://127.0.0.1:8000/api/users/30/
 
 ###
-
 POST http://127.0.0.1:8000/api/users/
 Content-Type: application/json
 
