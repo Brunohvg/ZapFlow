@@ -1,0 +1,32 @@
+{% if messages %}
+    <div class="alert-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+        {% for message in messages %}
+            <div id="alert-{{ forloop.counter }}" class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                </svg>
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- JavaScript para esconder o alerta automaticamente -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const alerts = document.querySelectorAll('.alert');
+
+            alerts.forEach(alert => {
+                // Esconde o alerta automaticamente após 5 segundos
+                setTimeout(() => {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close(); // Usa a API nativa do Bootstrap para fechar
+                }, 5000); // 5000ms = 5 segundos
+            });
+        });
+    </script>
+{% endif %}
+    

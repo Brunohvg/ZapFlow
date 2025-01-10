@@ -1,0 +1,16 @@
+<div class="card {{ card_class }}">
+  <div class="card-body {{ body_class }}">
+    <!-- Título -->
+    {% if title %}
+      <h5 class="card-title fw-semibold mb-4">{{ title }}</h5>
+    {% endif %}
+
+    <!-- Conteúdo principal -->
+    {% if content %}
+      <p class="mb-0">{{ content }}</p>
+    {% endif %}
+
+    <!-- Slot extra para customização -->
+    {% block extra_content %}{% endblock %}
+  </div>
+</div>

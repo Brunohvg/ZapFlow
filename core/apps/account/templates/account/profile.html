@@ -1,0 +1,9 @@
+{% extends "base/general_base.html" %}
+
+{% block title %}Cadastro{% endblock %}
+
+{% block content %}
+    {% include "partials/card.html" with title="ZapFlow -  Sistema de notificação em tempo real" content="Com a ZapFlow, seus dados estão totalmente seguros e em conformidade com a LGPD, garantindo que suas informações nunca serão compartilhadas sem seu consentimento." %}  
+    {% include "partials/alert.html" %}
+    {% include "./includes/profile_include.html"%}
+{% endblock content %}

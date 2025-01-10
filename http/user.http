@@ -1,0 +1,32 @@
+GET http://127.0.0.1:8000/api/users/
+###
+
+GET http://127.0.0.1:8000/api/users/30/
+
+###
+
+POST http://127.0.0.1:8000/api/users/
+Content-Type: application/json
+
+{
+
+        "username": "teste.19@gmail.com",
+    "email": "teste.19@gmail.com",
+    "first_name": "tessss",
+    "last_name": "tes"
+  }
+
+###
+
+DELETE  http://127.0.0.1:8000/api/users/31/
+###
+
+PUT http://127.0.0.1:8000/api/users/
+Content-Type: application/json
+
+{
+    
+    "id": 31,
+    "username": "tese de verde",
+
+}

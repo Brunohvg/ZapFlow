@@ -1,0 +1,124 @@
+{% load static %}
+<div class="row">
+  <!-- Coluna: Card de Perfil -->
+  <div class="col-lg-4 col-xlg-3 col-md-5">
+    <div class="card">
+      <div class="card-body">
+        <center class="m-t-30">
+          <img src="{% static 'assets/images/profile/user-1.jpg' %}" class="rounded-circle" width="145" alt="Foto de perfil">
+          <h4 class="card-title mt-3">{{ request.user.full_name|default:request.user.email }}</h4>
+          <h6 class="card-subtitle">Otimize a gestão de seus clientes e pedidos</h6>
+        </center>
+      </div>
+      <div><hr></div>
+      <div class="card-body">
+        <!-- Statuses e Informações -->
+        <small class="text-muted">Status do E-mail</small>
+        <h6>
+          {% if request.user.is_verified %}
+            <span class="text-success">✔️ Verificado</span>
+          {% else %}
+            <span class="text-danger">❌ Não Verificado</span>
+            <a href="#" class="text-primary">Reenviar Verificação</a>
+          {% endif %}
+        </h6>
+
+        <small class="text-muted">Status da Conta</small>
+        <h6>{{ request.user.is_active|yesno:"Ativa,Inativa" }}</h6>
+
+        <small class="text-muted">Data de Cadastro</small>
+        <h6>{{ request.user.date_joined|date:"d/m/Y" }}</h6>
+
+        <small class="text-muted">Último Login</small>
+        <h6>{{ request.user.last_login|date:"d/m/Y H:i" }}</h6>
+
+        <small class="text-muted">Número de Telefone</small>
+        <h6>{{ request.user.phone_number|default:"Não informado" }}</h6>
+
+        <small class="text-muted">Tipo de Conta</small>
+        <h6>{{ request.user.account_type|default:"Padrão" }}</h6>
+
+        <small class="text-muted">2FA</small>
+        <h6>
+          {% if request.user.two_factor_enabled %}
+            <span class="text-success">Ativado</span>
+          {% else %}
+            <span class="text-danger">Não Ativado</span>
+          {% endif %}
+        </h6>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coluna: Formulário de Atualização -->
+  <div class="col-lg-8 col-xlg-9 col-md-7">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title m-t-10">Atualizar Dados Cadastrais e Senha</h4>
+        <form method="post" class="form-horizontal form-material mx-2" action="{% url 'account:update_profile' %}">
+          {% csrf_token %}
+
+          <!-- Dados Pessoais -->
+          <div class="mb-3">
+            <label for="name_user" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="name_user" name="full_name" value="{{ request.user.full_name }}">
+          </div>
+
+          <div class="mb-3">
+            <label for="email_user" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email_user" value="{{ request.user.email }}" disabled>
+            <div id="emailHelp" class="form-text">Seu e-mail não pode ser atualizado.</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="whatsapp_user" class="form-label">Whatsapp</label>
+            <input type="text" class="form-control" id="whatsapp_user" name="phone_number" value="{{ request.user.phone_number }}">
+          </div>
+          
+          <div class="mb-3">
+            <label for="birthdate_user" class="form-label">Data de Nascimento</label>
+            <input type="date" class="form-control" id="birthdate_user" name="birthdate" value="{{ request.user.birthdate|date:'Y-m-d' }}">
+          </div>
+          
+
+          <!-- Collapse: Alteração de Senha -->
+          <div class="card mt-4 shadow-sm border-0">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="card-title mb-0">Alterar Senha</h5>
+                <a class="btn btn-outline-info btn-sm" data-bs-toggle="collapse" href="#passwordCollapse" role="button" aria-expanded="false" aria-controls="passwordCollapse">
+                  Alterar <i class="bi bi-chevron-down"></i>
+                </a>
+              </div>
+              <div class="collapse" id="passwordCollapse">
+                <!-- Senha Atual -->
+                <div class="mb-3">
+                  <label for="id_old_password" class="form-label">Senha Atual</label>
+                  <input type="password" name="old_password" class="form-control" id="id_old_password" placeholder="Digite sua senha atual" >
+                </div>
+
+                <!-- Nova Senha -->
+                <div class="mb-3">
+                  <label for="id_new_password1" class="form-label">Nova Senha</label>
+                  <input type="password" name="new_password1" class="form-control" id="id_new_password1" placeholder="Digite sua nova senha" >
+                </div>
+
+                <!-- Confirmar Nova Senha -->
+                <div class="mb-3">
+                  <label for="id_new_password2" class="form-label">Confirmar Nova Senha</label>
+                  <input type="password" name="new_password2" class="form-control" id="id_new_password2" placeholder="Confirme sua nova senha" >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botão de Atualizar -->
+          <button type="submit" class="btn btn-primary mt-4">Atualizar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

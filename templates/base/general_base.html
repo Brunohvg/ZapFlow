@@ -1,0 +1,58 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Título Padrão{% endblock %}</title>
+
+  <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logos/favicon.png' %}" />
+  <link rel="stylesheet" href="{% static 'assets/css/styles.min.css' %}" />
+  {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+  <!-- Body Wrapper -->
+  {% block body_wrapper %}
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    
+    <!-- Sidebar Start -->
+    {% block sidebar %}
+      {% include "partials/sidebar.html" %}
+    {% endblock %}
+    <!-- Sidebar End -->
+    <!-- Main Wrapper -->
+    <div class="body-wrapper">
+      <!-- Header Start -->
+      {% block header %}
+        {% include "partials/header.html" %}
+        {% include "partials/alert.html" %}
+      {% endblock %}
+      <!-- Header End -->
+      <div class="body-wrapper-inner">
+        <div class="container-fluid">
+          {% block content %}
+            {% include "partials/card.html" with title="Meu Título" content="Conteúdo do Card" %}
+          {% endblock %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock body_wrapper %}
+
+  <!-- Scripts -->
+  <script src="{% static 'assets/libs/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/sidebarmenu.js' %}"></script>
+  <script src="{% static 'assets/js/app.min.js' %}"></script>
+  <script src="{% static 'assets/libs/simplebar/dist/simplebar.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+  <script src="{% static 'assets/libs/apexcharts/dist/apexcharts.min.js' %}"></script>
+  <script src="{% static 'assets/js/dashboard.js' %}"></script>
+
+  {% block extra_js %}
+  
+  {% endblock %}
+</body>
+</html>
