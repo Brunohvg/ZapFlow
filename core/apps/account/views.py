@@ -113,13 +113,14 @@ def logout_view(request):
     return redirect('account:login')
 
 @login_required
+@login_required
 def update_profile(request):
     """
     View para atualização de perfil e senha do usuário.
     """
     if request.method == 'POST':
         user = request.user
-        update_profile_data = True
+        update_profile_data = True  # Flag para definir se o perfil será atualizado
 
         # Atualização de dados do perfil
         user.full_name = request.POST.get('full_name', user.full_name)
@@ -138,10 +139,10 @@ def update_profile(request):
         new_password1 = request.POST.get('new_password1')
         new_password2 = request.POST.get('new_password2')
 
-        # Verificação da senha
+        # Se os campos de senha estiverem vazios, permitir salvar os outros dados
         if old_password or new_password1 or new_password2:
             if not all([old_password, new_password1, new_password2]):
-                messages.error(request, "Todos os campos de senha são obrigatórios.", extra_tags='danger')
+                messages.error(request, "Todos os campos de senha são obrigatórios para alteração de senha.", extra_tags='danger')
                 update_profile_data = False
             elif user.check_password(old_password):
                 if new_password1 == new_password2:
@@ -159,7 +160,7 @@ def update_profile(request):
                 messages.error(request, "A senha atual está incorreta.", extra_tags='danger')
                 update_profile_data = False
 
-        # Salvar alterações do perfil somente se tudo estiver correto
+        # Salvar alterações do perfil somente se não houver erros
         if update_profile_data:
             user.save()
             messages.success(request, "Dados atualizados com sucesso!")

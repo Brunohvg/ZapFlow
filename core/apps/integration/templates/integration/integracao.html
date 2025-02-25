@@ -1,0 +1,11 @@
+{% extends "base/general_base.html" %}
+
+{% block title %}Integração{% endblock %}
+
+{% block content %}
+    <h1 class="fw-semibold" style="padding-bottom: 1.5rem;"  >Integração</h1>
+    <div class="row">
+        {% include "integration/includes/cards.html" with card_header="Configuração do NuvemShop" card_title="Integração com NuvemShop" card_text="Gerencie a integração com o NuvemShop diretamente por aqui." button_text="Integrar" button_link="nuvemshop/" %}
+        {% include "integration/includes/cards.html" with card_header="Configuração do WhatsApp" card_title="Integração com WhatsApp" card_text="Gerencie a integração com o WhatsApp diretamente por aqui." button_text="Integrar" button_link="whatsapp/" %}
+    </div>
+{% endblock %}

@@ -36,10 +36,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # apps de terceiros
     'rest_framework',
+    'drf_yasg',
     # minhas apps
     "core.apps.account",
     "core.apps.dashboard",
     "core.apps.rest_api",
+    "core.apps.integration",
 ]
 
 
@@ -137,3 +139,5 @@ MEDIA_ROOT = BASE_DIR.joinpath("media")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -1,10 +1,14 @@
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import UserViewSet
+
 # Criando o router
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
-#router.register(r'dashboard', DashboardViewSet)
-#router.register(r'integrations', IntegrationViewSet)
+#router.register(r'produtos', ProdutoViewSet)  # Rota para produto
 
-# URLs
-urlpatterns = router.urls
+# URLs da API
+urlpatterns = [
+    path('', include(router.urls)),
+    
+]
